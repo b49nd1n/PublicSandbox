@@ -10,14 +10,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 
 public class XXEtest {
@@ -53,8 +50,8 @@ public class XXEtest {
 
         System.out.println("XML:");
         System.out.println(xmlString2);
-        JAXBContext jaxbContext = JAXBContext.newInstance(MyObject.class);
-        MyObject    myObject;
+        JAXBContext  jaxbContext      = JAXBContext.newInstance(MyObject.class);
+        MyObject     myObject;
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
 
@@ -76,7 +73,7 @@ public class XXEtest {
             XMLStreamReader xsr = xif.createXMLStreamReader(stringReader);
             myObject = (MyObject) jaxbUnmarshaller.unmarshal(xsr);
         }
-        System.out.println("XXE success: "+ myObject.getField1());
+        System.out.println("XXE success: " + myObject.getField1());
 
 
         System.out.println("SECURE VARIANT:");

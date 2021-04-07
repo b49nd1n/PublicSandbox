@@ -28,15 +28,13 @@ public class XXEtest {
             JAXBException, XMLStreamException {
 
 
-        // Создаём временный файл и вписываем туда секрет
-
-
+        // Пусть у нас есть файл с секретом
         Path secretfile = Paths.get("secretfile");
-
-
         System.out.println("TMP File:");
         Files.readAllLines(secretfile).forEach(System.out::println);
 
+
+        //xml with xxe        
         String xmlString2 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                             + "<!DOCTYPE myobject[<!ENTITY xxe SYSTEM \"file:///"
                             + secretfile.toAbsolutePath() // XXE
@@ -58,6 +56,7 @@ public class XXEtest {
         System.out.println("INSECURE VARIANT:");
 
 
+                
         XMLInputFactory xif = XMLInputFactory.newFactory();
 
         /*
